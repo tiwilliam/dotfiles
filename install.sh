@@ -14,6 +14,14 @@ case $(uname) in
         INSTALL_DIR="/home/${USER}"
 esac
 
+# Are you sure?
+read -p "This may overwrite existing files in ${INSTALL_DIR}. Are you sure? (y/n) " -n 1
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Aborting."
+    exit 1
+fi
+
 # Get latest files
 if [ -d "${TMP_DIR}" ]; then
     pushd ${TMP_DIR}
