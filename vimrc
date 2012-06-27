@@ -1,13 +1,17 @@
 filetype off
+filetype plugin on
 filetype plugin indent on
 
 set t_Co=256
 set encoding=utf-8
 set laststatus=2
 set directory=/tmp
+set nocompatible
+set ruler
+set number
 
 " Make it fancy
-syntax enable
+syntax on
 colorscheme ir_black_sg
 
 set rtp+=~/.vim/bundle/vundle/
@@ -18,12 +22,16 @@ Bundle 'Lokaltog/vim-powerline',
 
 let g:pyflakes_use_quickfix = 0
 
-highlight SpellBad ctermbg=red ctermfg=white guibg=#592929
-highlight MarkError ctermbg=red ctermfg=white guibg=#592929
-
+highlight MarkError ctermbg=red ctermfg=white
 match MarkError /[\x7f-\xff]/   " Broken chars
 match MarkError /\s\+\%#\@<!$/  " Extra whitespace
 match MarkError /\%80v.\+/      " 80 char limit
+
+" 79 char limit
+if exists('+colorcolumn')
+  highlight ColorColumn ctermbg=236 ctermfg=white
+  set colorcolumn=79
+endif
 
 " Remember cursor position
 function! ResCur()
@@ -41,11 +49,6 @@ set expandtab
 set autoindent
 set smartindent
 set tabstop=4 softtabstop=4 shiftwidth=4
-
-" Line number
-set ruler
-set number
-syntax on
 
 " Aliases
 :command! W w
