@@ -58,4 +58,5 @@ alias commit='git commit'
 alias status='git status --ignore-submodules'
 alias diff='git diff --ignore-submodules --color'
 alias add='git add'
+alias push='git push origin $(current_branch)'
 alias log="git log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue) <%an>%Creset' --abbrev-commit --color"
