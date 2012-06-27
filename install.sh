@@ -26,6 +26,7 @@ fi
 if [ -d "${TMP_DIR}" ]; then
     pushd ${TMP_DIR}
         git pull
+        git submodule init
         git submodule update
     popd
 else
