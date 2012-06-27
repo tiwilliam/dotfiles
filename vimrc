@@ -9,6 +9,7 @@ set directory=/tmp
 set nocompatible
 set ruler
 set number
+set hlsearch
 
 " Make it fancy
 syntax on
@@ -22,7 +23,10 @@ Bundle 'Lokaltog/vim-powerline',
 
 let g:pyflakes_use_quickfix = 0
 
+" Highlight colors
+highlight Search ctermbg=yellow ctermfg=black
 highlight MarkError ctermbg=red ctermfg=white
+
 match MarkError /[\x7f-\xff]/   " Broken chars
 match MarkError /\s\+\%#\@<!$/  " Extra whitespace
 match MarkError /\%80v.\+/      " 80 char limit
@@ -54,6 +58,7 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 :command! W w
 
 " TAB autocomplete
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 function! Tab_Or_Complete()
   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
     return "\<C-N>"
@@ -61,5 +66,3 @@ function! Tab_Or_Complete()
     return "\<Tab>"
   endif
 endfunction
-
-inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
