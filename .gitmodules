@@ -1,3 +1,6 @@
 [submodule "vim/ftplugin/python/pyflakes"]
 	path = vim/ftplugin/python/pyflakes
 	url = https://github.com/pyflakes/pyflakes.git
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
