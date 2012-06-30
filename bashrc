@@ -49,7 +49,7 @@ alias grep='grep --color --exclude="*.pyc"'
 
 # Environment flags
 PS1="$green1\u@\h $blue1\w $red1\`current_branch\`$purple1\$ $clear"
-PATH=$PATH:~/bin
+PATH="/usr/local/bin:~/bin:$PATH"
 EDITOR="vim"
 export PS1 PATH EDITOR
 
