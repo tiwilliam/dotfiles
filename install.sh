@@ -11,7 +11,7 @@ case $(uname) in
     ;;
     *)
         BASH_CONFIG=".bashrc"
-        INSTALL_DIR="/home/${USER}"
+        INSTALL_DIR="${HOME}"
 esac
 
 # Are you sure?
