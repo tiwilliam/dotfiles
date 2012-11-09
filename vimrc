@@ -19,14 +19,26 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
-Bundle 'Lokaltog/vim-powerline',
+Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'AutoComplPop'
+Bundle 'ctrlp.vim'
 
-let g:pyflakes_use_quickfix = 0
+" Ctrl-P shortcuts
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/src/coverage/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc
+
+" CMD+S saving
+map <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>i
 
 " Highlight colors
 highlight Search ctermbg=yellow ctermfg=black
 highlight MarkError ctermbg=red ctermfg=white
 
+" Highlight suspicious stuff
 match MarkError /[\x7f-\xff]/   " Broken chars
 match MarkError /\s\+\%#\@<!$/  " Extra whitespace
 match MarkError /\%80v.\+/      " 80 char limit
