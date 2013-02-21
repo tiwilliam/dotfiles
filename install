@@ -32,9 +32,9 @@ function download_dotfiles {
 }
 
 function install_gitconfig {
-    user ' - What is your git name?'
+    echo ' - What is your git name?'
     read -e git_rname
-    user ' - What is your git email?'
+    echo ' - What is your git email?'
     read -e git_email
 
     echo sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
