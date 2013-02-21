@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# OS specific stuff
+case $(uname) in
+    Darwin)
+        BASH_CONFIG=".profile"
+        INSTALL_DIR="/Users/${USER}"
+    ;;
+    *)
+        BASH_CONFIG=".bashrc"
+        INSTALL_DIR="${HOME}"
+esac
+
+GIT_URL="https://github.com/tiwilliam/dotfiles.git"
+STORAGE_DIR="${INSTALL_DIR}/.dotfiles"
+
+function download_dotfiles {
+    # Get latest files
+    if [ -d "${STORAGE_DIR}" ]; then
+        pushd ${STORAGE_DIR}
+            git pull
+            git submodule init
+            git submodule update
+        popd
+    else
+        git clone ${GIT_URL} ${STORAGE_DIR}
+        pushd ${STORAGE_DIR}
+            git submodule init
+            git submodule update
+        popd
+    fi
+}
+
+function install_gitconfig {
+    user ' - What is your git name?'
+    read -e git_rname
+    user ' - What is your git email?'
+    read -e git_email
+
+    echo sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
+}
+
+function install_dotfiles {
+    for file in $( find ${STORAGE_DIR} -name "*.symlink" -maxdepth 2 ); do
+        echo ln -s "${file}" "${INSTALL_DIR}/.${file}"
+    done
+
+    echo ln -s "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
+}
+
+download_dotfiles
+install_gitconfig
+install_dotfiles

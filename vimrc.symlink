@@ -21,8 +21,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'AutoComplPop'
 Bundle 'ctrlp.vim'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'ervandew/supertab'
 
 " Ctrl-P shortcuts
 let g:ctrlp_map = '<c-p>'
