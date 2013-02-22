@@ -14,6 +14,14 @@ esac
 GIT_URL="https://github.com/tiwilliam/dotfiles.git"
 STORAGE_DIR="${INSTALL_DIR}/.dotfiles"
 
+function link_file {
+    if [ -f "$2" ]; then
+        echo "File already exists: $2"
+    else
+        ln -s "$1" "$2"
+    fi
+}
+
 function download_dotfiles {
     # Get latest files
     if [ -d "${STORAGE_DIR}" ]; then
@@ -32,20 +40,21 @@ function download_dotfiles {
 }
 
 function install_gitconfig {
-    echo ' - What is your git name?'
-    read -e git_name
-    echo ' - What is your git email?'
-    read -e git_email
-
-    sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
+    if [ ! -f "${INSTALL_DIR}/.gitconfig" ]; then
+        echo 'What is your git name?'
+        read -e git_name
+        echo 'What is your git email?'
+        read -e git_email
+        sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
+    fi
 }
 
 function install_dotfiles {
     for file in $( find ${STORAGE_DIR} -name "*.symlink" -maxdepth 2 ); do
-        echo ln -s "${file}" "${INSTALL_DIR}/.${file}"
+        link_file "${file}" "${INSTALL_DIR}/.${file}"
     done
 
-    echo ln -s "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
+    link_file "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
 }
 
 download_dotfiles

@@ -1,6 +1,6 @@
 [user]
-	name = AUTHORNAME
-	email = AUTHOREMAIL
+	name = NAME
+	email = EMAIL
 
 [alias]
     co = checkout
