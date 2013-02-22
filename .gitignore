@@ -1,1 +1,6 @@
 .netrwhist
+vim.symlink/bundle/jedi-vim
+vim.symlink/bundle/supertab
+vim.symlink/bundle/ctrlp.vim
+vim.symlink/bundle/syntastic
+vim.symlink/bundle/vim-powerline
