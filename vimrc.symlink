@@ -18,7 +18,6 @@ colorscheme ir_black_sg
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'ctrlp.vim'

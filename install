@@ -3,11 +3,11 @@
 # OS specific stuff
 case $(uname) in
     Darwin)
-        BASH_CONFIG=".profile"
+        BASH_CONFIG="profile"
         INSTALL_DIR="/Users/${USER}"
     ;;
     *)
-        BASH_CONFIG=".bashrc"
+        BASH_CONFIG="bashrc"
         INSTALL_DIR="${HOME}"
 esac
 
@@ -18,7 +18,7 @@ function link_file {
     link=true
 
     if [ -f "$2" ] || [ -d "$2" ]; then
-        read -p "$2: File or directory already exists - overwrite? [y/N]"
+        read -p "$2: File or directory already exists - overwrite? [y/N] "
         if [ "${REPLY}" == "y" ]; then
             rm -rf "$2"
         else
@@ -52,8 +52,10 @@ function install_gitconfig {
     if [ ! -f "${INSTALL_DIR}/.gitconfig" ]; then
         echo 'What is your git name?'
         read -e git_name
+
         echo 'What is your git email?'
         read -e git_email
+
         sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
     fi
 }
@@ -61,11 +63,12 @@ function install_gitconfig {
 function install_dotfiles {
     for file in $(find ${STORAGE_DIR} -maxdepth 1 -name "*.symlink"); do
         basename=$(basename "${file%.*}")
-        destination="${INSTALL_DIR}/.${basename}"
-        link_file "${file}" "${destination}"
-    done
 
-    link_file "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
+        # Support for both Linux and Darwin
+        [ "${basename}" == "bashrc" ] && basename=${BASH_CONFIG}
+
+        link_file "${file}" "${INSTALL_DIR}/.${basename}"
+    done
 }
 
 download_dotfiles
