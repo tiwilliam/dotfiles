@@ -52,11 +52,3 @@ PS1="$green1\u@\h $blue1\w $red1\`current_branch\`$purple1\$ $clear"
 PATH="/usr/local/bin:~/bin:$PATH"
 EDITOR="vim"
 export PS1 PATH EDITOR
-
-# Git alias
-alias commit='git commit'
-alias status='git status --ignore-submodules'
-alias diff='git diff --ignore-submodules --color'
-alias add='git add'
-alias push='git push origin $(current_branch)'
-alias log="git log --graph --pretty=format:'%Cred%h%Creset - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue) <%an>%Creset' --abbrev-commit --color"
