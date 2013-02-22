@@ -15,7 +15,7 @@ GIT_URL="https://github.com/tiwilliam/dotfiles.git"
 STORAGE_DIR="${INSTALL_DIR}/.dotfiles"
 
 function link_file {
-    if [ -f "$2" ]; then
+    if [ -f "$2" ] || [ -d "$2" ]; then
         echo "File already exists: $2"
     else
         ln -s "$1" "$2"
@@ -50,8 +50,10 @@ function install_gitconfig {
 }
 
 function install_dotfiles {
-    for file in $(find ${STORAGE_DIR} -name "*.symlink" -maxdepth 2); do
-        link_file "${file}" "${INSTALL_DIR}/.$(basename ${file})"
+    for file in $(find ${STORAGE_DIR} -name "*.symlink" -maxdepth 1); do
+        basename=$(basename "${file%.*}")
+        destination="${INSTALL_DIR}/.${basename}"
+        link_file "${file}" "${destination}"
     done
 
     link_file "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
