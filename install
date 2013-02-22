@@ -50,8 +50,8 @@ function install_gitconfig {
 }
 
 function install_dotfiles {
-    for file in $( find ${STORAGE_DIR} -name "*.symlink" -maxdepth 2 ); do
-        link_file "${file}" "${INSTALL_DIR}/.${file}"
+    for file in $(find ${STORAGE_DIR} -name "*.symlink" -maxdepth 2); do
+        link_file "${file}" "${INSTALL_DIR}/.$(basename ${file})"
     done
 
     link_file "${STORAGE_DIR}/bashrc" "${INSTALL_DIR}/${BASH_CONFIG}"
