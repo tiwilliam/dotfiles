@@ -36,14 +36,14 @@ function download_dotfiles {
     if [ -d "${STORAGE_DIR}" ]; then
         pushd ${STORAGE_DIR} > /dev/null
             git pull -q
-            git submodule init
-            git submodule update
+            git submodule init -q
+            git submodule update -q
         popd > /dev/null
     else
         git clone ${GIT_URL} ${STORAGE_DIR} -q
         pushd ${STORAGE_DIR} > /dev/null
-            git submodule init
-            git submodule update
+            git submodule init -q
+            git submodule update -q
         popd > /dev/null
     fi
 }
