@@ -15,9 +15,18 @@ GIT_URL="https://github.com/tiwilliam/dotfiles.git"
 STORAGE_DIR="${INSTALL_DIR}/.dotfiles"
 
 function link_file {
+    link=true
+
     if [ -f "$2" ] || [ -d "$2" ]; then
-        echo "File already exists: $2"
-    else
+        read -p "$2: File or directory already exists - overwrite? [y/N]"
+        if [ "${REPLY}" == "y" ]; then
+            rm -rf "$2"
+        else
+            link=false
+        fi
+    fi
+
+    if [ ${link} == true ]; then
         ln -s "$1" "$2"
     fi
 }
@@ -25,17 +34,17 @@ function link_file {
 function download_dotfiles {
     # Get latest files
     if [ -d "${STORAGE_DIR}" ]; then
-        pushd ${STORAGE_DIR}
-            git pull
+        pushd ${STORAGE_DIR} > /dev/null
+            git pull -q
             git submodule init
             git submodule update
-        popd
+        popd > /dev/null
     else
-        git clone ${GIT_URL} ${STORAGE_DIR}
-        pushd ${STORAGE_DIR}
+        git clone ${GIT_URL} ${STORAGE_DIR} -q
+        pushd ${STORAGE_DIR} > /dev/null
             git submodule init
             git submodule update
-        popd
+        popd > /dev/null
     fi
 }
 
@@ -50,7 +59,7 @@ function install_gitconfig {
 }
 
 function install_dotfiles {
-    for file in $(find ${STORAGE_DIR} -name "*.symlink" -maxdepth 1); do
+    for file in $(find ${STORAGE_DIR} -maxdepth 1 -name "*.symlink"); do
         basename=$(basename "${file%.*}")
         destination="${INSTALL_DIR}/.${basename}"
         link_file "${file}" "${destination}"
