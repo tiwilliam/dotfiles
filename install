@@ -49,14 +49,20 @@ function download_dotfiles {
 }
 
 function install_gitconfig {
-    if [ ! -f "${INSTALL_DIR}/.gitconfig" ]; then
-        echo 'What is your git name?'
-        read -e git_name
+    destination="${INSTALL_DIR}/.gitconfig"
+    if [ -f "${destination}" ]; then
+        read -p "Do you want to replace your git config? [y/N] "
+    else
+        REPLY="y"
+    fi
 
-        echo 'What is your git email?'
+    if [ "${REPLY}" == "y" ]; then
+        echo "What is your git name?"
+        read -e git_name
+        echo "What is your git email?"
         read -e git_email
 
-        sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" ${STORAGE_DIR}/gitconfig > ${INSTALL_DIR}/.gitconfig
+        sed -e "s/NAME/$git_name/g" -e "s/EMAIL/$git_email/g" "${STORAGE_DIR}/gitconfig" > "${destination}"
     fi
 }
 
