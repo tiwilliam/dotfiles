@@ -1,0 +1,104 @@
+# Scrollback
+set -g history-limit 30000
+
+# Copy and paste on OS X
+set-option -g default-command "reattach-to-user-namespace -l bash"
+
+# Quicker response to C-a ESC to enter copy mode
+set -s escape-time 50
+
+# Change C-b to C-a like screen
+set-option -g prefix C-a
+bind-key C-a last-window
+
+# hsplit
+unbind _
+bind _ split-window -h
+
+# vsplit
+unbind -
+bind - split-window -v
+
+# Panes
+bind tab next-layout
+unbind C-o
+bind r rotate-window
+bind space select-pane -t:.+
+
+# Titles
+set-window-option -g automatic-rename on
+
+# reload config
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+
+# color
+set -g default-terminal "screen-256color"
+
+# Activity monitoring
+setw -g monitor-activity on
+set -g visual-activity on
+
+# status bar
+set-option -g status-utf8 on
+
+set -g status-interval 1
+set -g status-left-length 20
+set -g status-right-length 140
+set -g status-left '#[fg=green]#H #[fg=black] #[default]'
+set -g status-right '#[fg=green,bg=black,bright]#(tmux-mem-cpu-load 1) #[fg=red,dim]#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white]%a%l:%M:%S %p #[default] #[fg=blue]%Y-%m-%d '
+
+# default statusbar colors
+set -g status-fg white
+set -g status-bg default
+set -g status-attr bright
+
+# default window title colors
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg default
+set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr bright
+
+# double C-a should send C-a
+bind C-a send-prefix
+
+#### COLOUR (Solarized light)
+
+# default statusbar colors
+set-option -g status-bg white #base2
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg brightyellow #base00
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg white #base2
+set-option -g pane-active-border-fg brightcyan #base1
+
+# message text
+set-option -g message-bg white #base2
+set-option -g message-fg brightred #orange
+
+# pane number display
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+
+# clock
+set-window-option -g clock-mode-colour green #green
+
+# mouse support
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
