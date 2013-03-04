@@ -23,6 +23,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'ctrlp.vim'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'ervandew/supertab'
+Bundle 'kevinw/pyflakes-vim'
 
 " Ctrl-P shortcuts
 let g:ctrlp_map = '<c-p>'
