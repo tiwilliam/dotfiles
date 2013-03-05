@@ -29,14 +29,10 @@ bind space select-pane -t:.+
 set-window-option -g automatic-rename on
 
 # reload config
-bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+bind r source-file ~/.tmux.conf \; display-message ' Config reloaded... '
 
 # color
 set -g default-terminal "screen-256color"
-
-# Activity monitoring
-setw -g monitor-activity on
-set -g visual-activity on
 
 # status bar
 set-option -g status-utf8 on
@@ -44,8 +40,8 @@ set-option -g status-utf8 on
 set -g status-interval 1
 set -g status-left-length 20
 set -g status-right-length 140
-set -g status-left '#[fg=green]#H #[fg=black] #[default]'
-set -g status-right '#[fg=green,bg=black,bright]#(tmux-mem-cpu-load 1) #[fg=red,dim]#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white]%a%l:%M:%S %p #[default] #[fg=blue]%Y-%m-%d '
+set -g status-left ' '
+set -g status-right '#[bg=black, fg=red,dim] #(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white]%a%l:%M %p #[default] #[fg=blue]%Y-%m-%d '
 
 # default statusbar colors
 set -g status-fg white
@@ -75,7 +71,6 @@ set-option -g status-attr default
 # default window title colors
 set-window-option -g window-status-fg brightyellow #base00
 set-window-option -g window-status-bg default
-#set-window-option -g window-status-attr dim
 
 # active window title colors
 set-window-option -g window-status-current-fg brightred #orange
@@ -98,7 +93,7 @@ set-option -g display-panes-colour brightred #orange
 set-window-option -g clock-mode-colour green #green
 
 # mouse support
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
+set -g mode-mouse off
+set -g mouse-resize-pane off
+set -g mouse-select-pane off
+set -g mouse-select-window off
