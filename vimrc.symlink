@@ -79,3 +79,11 @@ function! Tab_Or_Complete()
     return "\<Tab>"
   endif
 endfunction
+
+" Fix Home and End keys in 256color mode
+if $TERM =~ '^screen-256color'
+  map <Esc>OH <Home>
+  map! <Esc>OH <Home>
+  map <Esc>OF <End>
+  map! <Esc>OF <End>
+endif
