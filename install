@@ -17,7 +17,7 @@ STORAGE_DIR="${INSTALL_DIR}/.dotfiles"
 function link_file {
     link=true
 
-    if [ -f "$2" ] || [ -d "$2" ]; then
+    if [ -f "$2" ] || [ -d "$2" ] || [ -h "$2" ]; then
         read -p "$2: File or directory already exists - overwrite? [y/N] "
         if [ "${REPLY}" == "y" ]; then
             rm -rf "$2"
