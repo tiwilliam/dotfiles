@@ -37,7 +37,7 @@ imap <C-s> <Esc>:w<CR>i
 
 " Highlight colors
 highlight Search ctermbg=yellow ctermfg=black
-highlight MarkError ctermbg=red ctermfg=white
+highlight MarkError ctermbg=red
 
 " Highlight suspicious stuff
 match MarkError /[\x7f-\xff]/   " Broken chars
@@ -46,7 +46,7 @@ match MarkError /\%80v.\+/      " 80 char limit
 
 " 79 char limit
 if exists('+colorcolumn')
-  highlight ColorColumn ctermbg=236 ctermfg=white
+  highlight ColorColumn ctermbg=0
   set colorcolumn=79
 endif
 
