@@ -36,12 +36,10 @@ alias mv='mv -i'
 alias grep='grep --color --exclude="*.pyc"'
 
 # Environment flags
-PS1="$green\u@\h $blue\w $red\`current_branch\`$purple\$ $clear"
+PS1="\[$green\]\u@\h \[$blue\]\w \[$red\]\`current_branch\`\[$purple\]\$ \[$clear\]"
 PATH="/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 EDITOR="vim"
 export PS1 PATH EDITOR
 
-# Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-source ~/.private
+source ~/.bash_private
+source ~/.dotfiles/git-completion.bash
