@@ -13,7 +13,7 @@ set hlsearch
 
 " Make it fancy
 syntax on
-colorscheme ir_black_sg
+colorscheme Tomorrow-Night-Eighties
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -42,13 +42,7 @@ highlight MarkError ctermbg=red
 " Highlight suspicious stuff
 match MarkError /[\x7f-\xff]/   " Broken chars
 match MarkError /\s\+\%#\@<!$/  " Extra whitespace
-match MarkError /\%80v.\+/      " 80 char limit
-
-" 79 char limit
-if exists('+colorcolumn')
-  highlight ColorColumn ctermbg=0
-  set colorcolumn=79
-endif
+match MarkError /\%100v.\+/     " 99 char limit
 
 " Remember cursor position
 function! ResCur()
