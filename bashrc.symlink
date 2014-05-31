@@ -39,7 +39,8 @@ alias grep='grep --color --exclude="*.pyc"'
 PS1="\[$green\]\u@\h \[$blue\]\w \[$red\]\`current_branch\`\[$purple\]\$ \[$clear\]"
 PATH="/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 EDITOR="vim"
-export PS1 PATH EDITOR
+GOPATH="$HOME/Documents/Code/Go"
+export PS1 PATH EDITOR GOPATH
 
 source ~/.bash_private
 source ~/.dotfiles/git-completion.bash
