@@ -43,6 +43,8 @@ EDITOR="vim"
 GOPATH="/Users/$USER/Documents/Go"
 export PS1 PATH EDITOR GOPATH
 
-source ~/.bash_private
+if [ -f ~/.bash_private ]; then
+    source ~/.bash_private
+fi
+
 source ~/.dotfiles/git-completion.bash
-source ~/.dotfiles/common-completion.bash
