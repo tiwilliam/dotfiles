@@ -1,11 +1,11 @@
-clear=$(tput sgr0)
-black=$(tput setaf 0)
-red=$(tput setaf 1)
-green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-purple=$(tput setaf 5)
-white=$(tput setaf 8)
+clear=$(tput -T xterm sgr0)
+black=$(tput -T xterm setaf 0)
+red=$(tput -T xterm setaf 1)
+green=$(tput -T xterm setaf 2)
+yellow=$(tput -T xterm setaf 3)
+blue=$(tput -T xterm setaf 4)
+purple=$(tput -T xterm setaf 5)
+white=$(tput -T xterm setaf 8)
 
 # Get current git branch if any
 function current_branch {
