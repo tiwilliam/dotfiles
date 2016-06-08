@@ -38,10 +38,11 @@ alias curl='curl -4'
 
 # Environment flags
 PS1="\[$green\]\u@\h \[$blue\]\w \[$red\]\`current_branch\`\[$purple\]\$ \[$clear\]"
-PATH="/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 EDITOR="vim"
 GOPATH="/Users/$USER/Documents/Go"
-export PS1 PATH EDITOR GOPATH
+PATH="/opt/chefdk/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:$GOPATH/bin:$PATH"
+
+export PS1 EDITOR GOPATH PATH
 
 if [ -f ~/.bash_private ]; then
     source ~/.bash_private
