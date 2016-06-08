@@ -6,3 +6,11 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+[*.phtml]
+indent_style = space
+indent_size = 4
+
+[*.coffee]
+indent_style = space
+indent_size = 2
+
