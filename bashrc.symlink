@@ -1,4 +1,4 @@
-clear=$(tput -T xterm sgr0)
+c=$(tput -T xterm sgr0)
 black=$(tput -T xterm setaf 0)
 red=$(tput -T xterm setaf 1)
 green=$(tput -T xterm setaf 2)
@@ -8,12 +8,19 @@ purple=$(tput -T xterm setaf 5)
 white=$(tput -T xterm setaf 8)
 
 # Get current git branch if any
-function current_branch {
-    BRANCH=$(git branch 2> /dev/null | sed -n 's/^* \(.*\)/\1/p')
-    if [ ! -z "${BRANCH}" ]; then
-        echo "${BRANCH} "
+find_git_branch() {
+    local branch
+    if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+        if [[ "$branch" == "HEAD" ]]; then
+            branch='{detached}'
+        fi
+        git_branch="$branch"
+    else
+        git_branch=""
     fi
 }
+
+PROMPT_COMMAND="find_git_branch; $PROMPT_COMMAND"
 
 # OS specific
 case $(uname) in
@@ -37,10 +44,10 @@ alias grep='grep --color --exclude="*.pyc"'
 alias curl='curl -4'
 
 # Environment flags
-PS1="\[$green\]\u@\h \[$blue\]\w \[$red\]\`current_branch\`\[$purple\]\$ \[$clear\]"
+PS1="\[$red\]\u\[$c\] at \[$green\]\h\[$c\] in \[$blue\]\w\[$c\] \[$purple\]\$git_branch\[$c\]\n\$ "
 EDITOR="vim"
 GOPATH="/Users/$USER/Documents/Go"
-PATH="/opt/chefdk/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:$GOPATH/bin:$PATH"
+PATH="/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/chefdk/bin:$GOPATH/bin:$PATH"
 
 export PS1 EDITOR GOPATH PATH
 
