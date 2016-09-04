@@ -12,9 +12,9 @@ find_git_branch() {
     local branch
     if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
         if [[ "$branch" == "HEAD" ]]; then
-            branch='{detached}'
+            branch="{detached} "
         fi
-        git_branch="$branch"
+        git_branch="$branch "
     else
         git_branch=""
     fi
@@ -44,7 +44,7 @@ alias grep='grep --color --exclude="*.pyc"'
 alias curl='curl -4'
 
 # Environment flags
-PS1="\[$red\]\u\[$c\] at \[$green\]\h\[$c\] in \[$blue\]\w\[$c\] \[$purple\]\$git_branch\[$c\]\n\$ "
+PS1="\[$red\]\u\[$c\] at \[$green\]\h\[$c\] in \[$blue\]\w\[$c\] \[$purple\]\$git_branch\[$c\]\$ "
 EDITOR="vim"
 GOPATH="/Users/$USER/Documents/Go"
 PATH="/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/chefdk/bin:$GOPATH/bin:$PATH"
