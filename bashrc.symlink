@@ -1,26 +1,7 @@
-c=$(tput -T xterm sgr0)
-black=$(tput -T xterm setaf 0)
-red=$(tput -T xterm setaf 1)
-green=$(tput -T xterm setaf 2)
-yellow=$(tput -T xterm setaf 3)
-blue=$(tput -T xterm setaf 4)
-purple=$(tput -T xterm setaf 5)
-white=$(tput -T xterm setaf 8)
-
-# Get current git branch if any
-find_git_branch() {
-    local branch
-    if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
-        if [[ "$branch" == "HEAD" ]]; then
-            branch="{detached} "
-        fi
-        git_branch="$branch "
-    else
-        git_branch=""
-    fi
-}
-
-PROMPT_COMMAND="find_git_branch; $PROMPT_COMMAND"
+c="\[\e[m\]"
+green="\[\e[31m\]"
+blue="\[\e[34m\]"
+red="\[\e[32m\]"
 
 # OS specific
 case $(uname) in
@@ -28,7 +9,7 @@ case $(uname) in
         export CLICOLOR=1
     ;;
     Linux)
-        eval "`dircolors`"
+        eval "$(dircolors)"
         export LS_OPTIONS='--color=auto'
     ;;
     *)
@@ -43,16 +24,32 @@ alias mv='mv -i'
 alias grep='grep --color --exclude="*.pyc"'
 alias curl='curl -4'
 
-# Environment flags
-PS1="\[$red\]\u\[$c\] at \[$green\]\h\[$c\] in \[$blue\]\w\[$c\] \[$purple\]\$git_branch\[$c\]\$ "
-EDITOR="vim"
-GOPATH="/Users/$USER/Documents/Go"
-PATH="/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/chefdk/bin:$GOPATH/bin:$PATH"
+GIT_PS1_SHOWDIRTYSTATE=true
+source ~/.dotfiles/git-prompt.sh
 
-export PS1 EDITOR GOPATH PATH
+function __exit_code {
+    if [ "$1" != "0" ]; then
+        printf "%s" "$green$1$c"
+    else
+        printf "%s" "$red$1$c"
+    fi
+}
+
+# Environment flags
+export PS1="$(__exit_code $?) $blue\w$c"'$(__git_ps1 " (%s)")'" \$ "
+export GOPATH=$HOME
+export GOROOT=/usr/local/opt/go/libexec
+export EDITOR="vim"
+export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$GOROOT/bin:$GOPATH/bin:$PATH"
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export GPG_TTY=$(tty)
 
 if [ -f ~/.bash_private ]; then
     source ~/.bash_private
 fi
 
-source ~/.dotfiles/git-completion.bash
+if [ "$(ssh-add -l)" = "The agent has no identities." ]; then
+    ssh-add -A
+fi
+
