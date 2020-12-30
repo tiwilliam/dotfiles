@@ -45,3 +45,4 @@ if [ "$(ssh-add -l)" = "The agent has no identities." ]; then
     ssh-add -A
 fi
 
+eval "$(shadowenv init bash)"
