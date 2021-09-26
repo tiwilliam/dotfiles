@@ -77,11 +77,19 @@ function install_dotfiles {
     done
 }
 
+function install_homebrew {
+    link_file "${STORAGE_DIR}/Brewfile" "${INSTALL_DIR}/Brewfile"
+    which brew > /dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    brew bundle
+    brew bundle --force cleanup
+}
+
 function install_keys {
-    ln -s "${INSTALL_DIR}/Documents/.ssh" "${INSTALL_DIR}/.ssh"
+    link_file "${INSTALL_DIR}/Documents/.ssh" "${INSTALL_DIR}/.ssh"
 }
 
 download_dotfiles
 install_gitconfig
 install_dotfiles
+install_homebrew
 install_keys
