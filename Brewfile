@@ -4,6 +4,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/services"
 tap "homebrew/cask-drivers"
+tap "instrumenta/instrumenta"
 
 # App Store
 mas "1Password", id: 1333542190
@@ -34,22 +35,25 @@ cask "spotify"
 cask "sublime-text"
 cask "tidal"
 
-# Services
-brew "postgresql"
-brew "redis"
-
 # Tools
 brew "awscli"
 brew "bash"
 brew "curl"
+brew "dnsmasq"
 brew "git"
 brew "helm"
 brew "htop"
 brew "ipcalc"
 brew "jq"
 brew "kind"
+brew "kompose"
+brew "kubeval"
+brew "kustomize"
 brew "make"
 brew "netcat"
 brew "node"
 brew "pyenv"
+brew "terraform"
+brew "watch"
+brew "yapf"
 brew "yarn"
