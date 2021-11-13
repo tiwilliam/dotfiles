@@ -32,8 +32,8 @@ cask "redisinsight"
 cask "sensiblesidebuttons"
 cask "sonos"
 cask "spotify"
-cask "sublime-text"
-cask "tidal"
+cask "signal"
+cask "visual-studio-code"
 
 # Tools
 brew "awscli"
