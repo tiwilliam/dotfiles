@@ -42,6 +42,6 @@ if [ -f ~/.bash_private ]; then
 fi
 
 if [ "$(ssh-add -l)" = "The agent has no identities." ]; then
-    ssh-add -A
+    ssh-add --apple-load-keychain
 fi
 
