@@ -36,12 +36,17 @@ export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$GOROOT/bin:$GOPATH/bin:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export GPG_TTY=$(tty)
+export BASH_SILENCE_DEPRECATION_WARNING=1
 
 if [ -f ~/.bash_private ]; then
     source ~/.bash_private
 fi
 
 if [ "$(ssh-add -l)" = "The agent has no identities." ]; then
-    ssh-add --apple-load-keychain
+    if [ $(defaults read loginwindow SystemVersionStampAsString | cut -d '.' -f 1) -gt 11 ]; then
+        ssh-add --apple-load-keychain
+    else
+        ssh-add -K
+    fi
 fi
 
