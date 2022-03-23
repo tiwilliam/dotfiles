@@ -52,3 +52,4 @@ fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(/opt/dev/venv/bin/dev-bare init bash)"
+eval "$(shadowenv init bash)"
