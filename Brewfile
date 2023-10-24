@@ -6,9 +6,8 @@ tap "homebrew/services"
 tap "homebrew/cask-drivers"
 
 # App Store
-mas "1Password", id: 1333542190
-mas "Bear", id: 1091189122
 mas "Slack", id: 803453959
+mas "Xcode", id: 497799835
 
 # Casks
 cask "adobe-creative-cloud"
@@ -17,13 +16,14 @@ cask "discord"
 cask "docker"
 cask "github"
 cask "google-chrome"
+cask "1password"
+cask "firefox"
 cask "google-cloud-sdk"
 cask "iterm2"
 cask "linear-linear"
 cask "moom"
 cask "notion"
 cask "postico"
-cask "postman"
 cask "redisinsight"
 cask "sensiblesidebuttons"
 cask "spotify"
